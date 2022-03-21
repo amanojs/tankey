@@ -1,8 +1,12 @@
-export interface Tank {
-    id: string;
+import { DateTimeString } from 'architecture/util/type/DateTime';
+import { Userid } from './User';
+
+export type TankId = string;
+export type Tank = {
+    userid: Userid;
+    tankId: TankId;
     title: string;
-    capacity: number;
+    badget: number;
     consumption: number;
-    supply_day: number;
-    next_supply: string; // timestamp
-}
+    remaining_per: number;
+};

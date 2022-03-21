@@ -1,5 +1,5 @@
-import { Tank } from 'architecture/domains/Tank';
+import { OwnSet } from 'architecture/domains/User';
 
-export abstract class ITankUseCase {
-    public abstract findTanks(): Promise<Tank[]>;
+export abstract class IOwnSet {
+    public abstract selectTotalBadget(): Promise<[]>;
 }
