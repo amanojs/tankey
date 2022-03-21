@@ -1,15 +1,17 @@
 import { DateTimeString } from 'architecture/util/type/DateTime';
 
+export type Userid = string;
 export type totalBadget = number;
 export type resetDate = number;
 export type User = {
+    userid: Userid;
     totalBadget: totalBadget;
     resetDate: resetDate;
     // YYYY-MM
     lastResetMonth: DateTimeString;
 };
 
-export function createUser(payload: { totalBadget: totalBadget; resetDate: resetDate }): User {
+export function createUser(payload: { userid: Userid; totalBadget: totalBadget; resetDate: resetDate }): User {
     const user_tmp: User = { ...payload, lastResetMonth: new Date().toISOString() };
     const user = updateResetLog(user_tmp);
     return user;
