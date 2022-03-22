@@ -11,7 +11,7 @@ import { useAuthState } from 'utils/hooks/useAuthState';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
-    const { user, updateUser } = useUserStorage();
+    const { user } = useUserStorage();
     const { saveUser } = useSaveUser({ userStorageService: useUserStorage() });
 
     useEffect(() => {
