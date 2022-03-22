@@ -12,7 +12,7 @@ import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
     const { user } = useUserStorage();
-    const { saveUser } = useSaveUser({ userStorageService: useUserStorage() });
+    const { saveUser } = useSaveUser({ userStorage: useUserStorage() });
 
     useEffect(() => {
         if (user) {
