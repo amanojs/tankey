@@ -30,7 +30,7 @@ export function calcRemainingPer(tank: Tank): remaining_per {
     // TODO  小数点切り上げ 見直す必要あり
     const { badget, consumption } = tank;
     // 小数点第一を基準に四捨五入
-    const decimals = Math.round((1 - badget / consumption) / 10);
+    const decimals = Math.round((1 - consumption / badget) * 100) / 100;
     const percent = decimals * 100;
     return percent;
 }
