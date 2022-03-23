@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useAuthState } from 'utils/hooks/useAuthState';
 import styles from '../styles/Home.module.css';
+import { TankList } from 'components/user/Tank/TankList';
 
 const Home: NextPage = () => {
     const { user } = useUserStorage();
@@ -20,7 +21,8 @@ const Home: NextPage = () => {
         }
     }, [user]);
 
-    const { isLogin, isLoading, userid } = useAuthState();
+    /* const { isLogin, isLoading, userid } = useAuthState(); */
+    const { isLogin, isLoading, userid } = { isLogin: true, isLoading: false, userid: 'amanojs' };
     const router = useRouter();
 
     useEffect(() => {
@@ -46,7 +48,7 @@ const Home: NextPage = () => {
 
             <SignInOrOutBtn />
 
-            <main className={styles.main}>ステータス画面 {userid}</main>
+            <main className={styles.main}>{user && <TankList />}</main>
         </div>
     );
 };
