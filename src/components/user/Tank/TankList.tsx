@@ -2,6 +2,7 @@ import { useReset } from 'architecture/applications/reset';
 import { calcRemainingPer } from 'architecture/domains/Tank';
 import { useTankStorage, useUserStorage } from 'architecture/util/ defaultService';
 import { useEffect } from 'react';
+import { TankCard } from './TankCard';
 
 export const TankList = () => {
     const { tanks } = useTankStorage();
@@ -14,15 +15,7 @@ export const TankList = () => {
         <>
             <div>
                 {tanks.map((tank) => {
-                    return (
-                        <div key={tank.tankId}>
-                            <h3>{tank.title}</h3>
-                            <div>{calcRemainingPer(tank)}%</div>
-                            <p>
-                                {tank.consumption}/{tank.badget}
-                            </p>
-                        </div>
-                    );
+                    return <TankCard key={tank.tankId} {...tank} />;
                 })}
             </div>
         </>
