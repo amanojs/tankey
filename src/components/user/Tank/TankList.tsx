@@ -1,6 +1,4 @@
-import { useReset } from 'architecture/applications/reset';
-import { calcRemainingPer } from 'architecture/domains/Tank';
-import { useTankStorage, useUserStorage } from 'architecture/util/ defaultService';
+import { useTankStorage } from 'architecture/util/ defaultService';
 import { useEffect } from 'react';
 import { TankCard } from './TankCard';
 
