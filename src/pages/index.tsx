@@ -13,7 +13,7 @@ import { TankList } from 'components/user/Tank/TankList';
 
 const Home: NextPage = () => {
     const { user } = useUserStorage();
-    const { saveUser } = useSaveUser({ userStorage: useUserStorage() });
+    const saveUser = useSaveUser();
 
     useEffect(() => {
         if (user) {
