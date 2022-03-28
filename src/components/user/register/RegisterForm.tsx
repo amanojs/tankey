@@ -81,6 +81,7 @@ const RegisterForm: FC = () => {
                     fullWidth
                     variant="outlined"
                     color="primary"
+                    type="tel"
                     error={Boolean(errors.nickname)}
                     helperText={errors.nickname?.message}
                     {...register('nickname', validateRule.nickname)}
