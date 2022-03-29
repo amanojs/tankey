@@ -15,7 +15,7 @@ export const Provider: React.FC = ({ children }) => {
         { tankId: 'tank3', title: '日用品', badget: 5000, consumption: 2000 }
     ]);
     const addTank = ({ title, badget }: addTankParam) => {
-        const tankId = getUniqueStr();
+        const tankId = getUniqueStr(10);
         const newtank = createTank({ tankId, title, badget, consumption: 0 });
         setTanks([...tanks, newtank]);
     };
@@ -31,7 +31,6 @@ export const Provider: React.FC = ({ children }) => {
 };
 
 function getUniqueStr(myStrong?: number): string {
-    let strong = 1000;
-    if (myStrong) strong = myStrong;
+    const strong = myStrong || 1000;
     return new Date().getTime().toString(16) + Math.floor(strong * Math.random()).toString(16);
 }
