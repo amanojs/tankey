@@ -1,13 +1,18 @@
-import { useTankStorage } from 'architecture/util/ defaultService';
-import { useEffect } from 'react';
+import { calcExBadget } from 'architecture/domains/Tank';
+import { useTankStorage, useUserStorage } from 'architecture/util/ defaultService';
+import { useEffect, useState } from 'react';
 import { TankCard } from './TankCard';
 
 export const TankList = () => {
+    const { user } = useUserStorage();
     const { tanks } = useTankStorage();
+    const [exBadget, setExBadget] = useState<number>(0);
 
     useEffect(() => {
         console.log(tanks);
-    }, [tanks]);
+        const exBadgetTmp = calcExBadget(tanks, user?.totalBadget || 0);
+        setExBadget(exBadgetTmp);
+    }, [tanks, user]);
 
     return (
         <>

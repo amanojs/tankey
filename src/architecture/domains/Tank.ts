@@ -1,3 +1,5 @@
+import { totalBadget } from './User';
+
 export type TankId = string;
 export type title = string;
 export type badget = number;
@@ -33,4 +35,12 @@ export function calcRemainingPer(tank: Tank): remaining_per {
     const decimals = Math.round((1 - consumption / badget) * 100) / 100;
     const percent = decimals * 100;
     return percent;
+}
+export function calcExBadget(tanks: Tank[], totalBadget: totalBadget): number {
+    const totalUsage = tanks.reduce((total: number, { badget }: Tank) => {
+        return total + badget;
+    }, 0);
+    const exBadget = totalBadget - totalUsage;
+    const exBadgetPosi = exBadget >= 0 ? exBadget : 0;
+    return exBadgetPosi;
 }
