@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useSaveUser } from 'architecture/applications/saveUser';
+import { useAddTank } from 'architecture/applications/addTank';
 import { needUpdate } from 'architecture/domains/User';
 import { useUserStorage } from 'architecture/util/ defaultService';
 import { Loading } from 'components/user/Loading';
@@ -17,12 +18,13 @@ import { UserSettingForm } from 'components/user/register/UserSettingForm';
 
 const Home: NextPage = () => {
     const { user } = useUserStorage();
+    const addTank = useAddTank();
     const [settingOpen, setSettingOpen] = useState(false);
 
     useEffect(() => {
         if (user) {
-            console.log({ user, needupdate: needUpdate(user) });
             setSettingOpen(false);
+            addTank({ title: '特別費', badget: 50000 });
         }
     }, [user]);
 
