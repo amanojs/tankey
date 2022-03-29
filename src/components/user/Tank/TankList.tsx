@@ -1,6 +1,7 @@
 import { calcExBadget } from 'architecture/domains/Tank';
 import { useTankStorage, useUserStorage } from 'architecture/util/ defaultService';
 import { useEffect, useState } from 'react';
+import { AddTankCard } from './AddTankCard';
 import { TankCard } from './TankCard';
 
 export const TankList = () => {
@@ -20,6 +21,8 @@ export const TankList = () => {
                 {tanks.map((tank) => {
                     return <TankCard key={tank.tankId} {...tank} />;
                 })}
+
+                <AddTankCard />
             </div>
         </>
     );
