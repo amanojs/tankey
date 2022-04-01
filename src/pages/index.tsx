@@ -1,13 +1,12 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useSaveUser } from 'architecture/applications/saveUser';
 import { useAddTank } from 'architecture/applications/addTank';
 import { needUpdate } from 'architecture/domains/User';
 import { useUserStorage } from 'architecture/util/ defaultService';
 import { Loading } from 'components/user/Loading';
 import SignInOrOutBtn from 'components/user/signin/SignInOrOutBtn';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAuthState } from 'utils/hooks/useAuthState';
 import styles from '../styles/Home.module.css';
 import { TankList } from 'components/user/Tank/TankList';
@@ -20,24 +19,23 @@ const Home: NextPage = () => {
     const { user } = useUserStorage();
     const addTank = useAddTank();
     const [settingOpen, setSettingOpen] = useState(false);
-
-    useEffect(() => {
-        if (user) {
-            setSettingOpen(false);
-            addTank({ title: '特別費', badget: 50000 });
-        }
-    }, [user]);
-
-    /* const { isLogin, isLoading, userid } = useAuthState(); */
     const { isLogin, isLoading, userid } = { isLogin: true, isLoading: false, userid: 'amanojs' };
+    /* const { isLogin, isLoading, userid } = useAuthState(); */
     const router = useRouter();
-
-    useEffect(() => {
+    const settingModalCtrl = useCallback(() => {
         if (isLogin && userid && user === undefined) {
             // 総予算と毎月のリセット日を設定するステップポップアップを表示
             setSettingOpen(true);
         }
+        if (isLogin && userid && user) {
+            setSettingOpen(false);
+            addTank({ title: '特別費', badget: 50000 });
+        }
     }, [isLogin, user, userid]);
+
+    useEffect(() => {
+        settingModalCtrl();
+    }, [settingModalCtrl]);
 
     if (isLoading) return <Loading />;
     if (!isLoading && !isLogin) {
@@ -65,7 +63,7 @@ const Home: NextPage = () => {
                                 alt="namecard"
                                 className="w-11/12 mx-auto block"
                             />
-                            <UserSettingForm userid={userid} />
+                            {userid && <UserSettingForm userid={userid} />}
                         </div>
                     </div>
                 </Fade>

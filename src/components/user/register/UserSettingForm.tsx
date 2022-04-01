@@ -54,8 +54,9 @@ export const UserSettingForm = (props: { userid: string }) => {
             setRegistLoading(true);
             await saveUser(props.userid, Number(totalBadget), Number(resetDate));
         } catch (err) {
-            setRegistLoading(false);
             setRegistError(true);
+        } finally {
+            setRegistLoading(false);
         }
     };
     const strEscape = (val: string): string => {
